@@ -30,4 +30,5 @@ def trial(beta, seed, n_states=50, gamma=0.8, samples=500):
                                                              reward=reward)
     vbeta_td = np.matmul(phi_50, w_td)
     error_td = np.sqrt(np.mean((vstar - vbeta_td) ** 2))
-    return {"beta": beta, "seed": seed, "error_td": error_td, "error_brm": error_brm, "vstar": vstar}
+    return {"beta": beta, "seed": seed, "error_td": error_td, "error_brm": error_brm, "vstar": vstar,
+            "reward": c._reward, "state_transition": c._transition_matrix}
