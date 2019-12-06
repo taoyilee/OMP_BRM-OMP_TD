@@ -38,9 +38,9 @@ class OMP_TD:
         n, k = phi.shape
         w = np.zeros((k, 1))
         reward = reward.reshape(len(reward), 1)
-        I = SelectedIndexes(n)
+        I = SelectedIndexes(k)
 
-        while len(I) < n and (residue is None or residue > self.beta):
+        while len(I) < k and (residue is None or residue > self.beta):
             c = np.linalg.norm(np.matmul(phi.T, reward + gamma * np.matmul(phi_prime, w) - np.matmul(phi, w)),
                                axis=1, ord=1) / n
             j = I.IBar[int(np.argmax(c[I.IBar]))]
