@@ -1,6 +1,6 @@
 # Feature selection in Reinforcement Learning
 
-This repository replicates the experiments described in [1].  
+This repository replicates the experiments described in [[1]](https://dl.acm.org/citation.cfm?id=3042686).  
 
 ## System requirements
 1. Python 3.8
