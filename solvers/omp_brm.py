@@ -3,7 +3,7 @@ from sklearn.linear_model import OrthogonalMatchingPursuit
 
 
 class OMP_BRM:
-    def __init__(self, beta=np.finfo(float).eps):
+    def __init__(self, beta):
         self.beta = beta
 
     def fit(self, gamma, phi, phi_prime, reward):

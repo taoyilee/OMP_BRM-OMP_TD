@@ -16,7 +16,6 @@ class RBF50:
             self.center = (states + 1) * np.random.random(n_basis)
         else:
             self.shaping_factor = shaping_factor * np.ones(n_basis - 1)
-            # self.center = np.array(list(range(0, 50)) + [np.random.rand() for _ in range(n_basis - 50)])
             self.center = np.linspace(0, states + 1, n_basis - 1)
 
     def phi(self, state):
@@ -30,7 +29,6 @@ class ChainMRP:
     TRANSITION_STAY = 1
     _p = None
     _r = None
-    _initial_state: int = None
     _current_state: int = None
 
     @property
@@ -60,7 +58,7 @@ class ChainMRP:
         self.rbf = RBF50(self.n_states)
         if initial_state not in list(range(1, number_of_states + 1)):
             raise ValueError(f"initial_state much in 1 .. {number_of_states}")
-        self._initial_state = initial_state
+
         self._current_state = initial_state
         self.min_reward = min_reward
         self.max_reward = max_reward
