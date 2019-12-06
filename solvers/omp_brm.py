@@ -1,7 +1,11 @@
+#  Copyright (c) 2019.
+#  Author:  Tao-Yi Lee
+#  This source code is released under MIT license. Check LICENSE for details.
+
+
 import numpy as np
 
 from solvers.helper import SelectedIndexes
-from sklearn.linear_model import OrthogonalMatchingPursuit
 
 
 class OMP_BRM:
@@ -9,6 +13,7 @@ class OMP_BRM:
         self.beta = beta
 
     def fit(self, gamma, phi, phi_prime, reward):
+        # TODO: Profile and optimize OMP-BRM
         residue = None
         n, k = phi.shape
         w = np.zeros((k, 1))

@@ -1,3 +1,7 @@
+#  Copyright (c) 2019.
+#  Author:  Tao-Yi Lee
+#  This source code is released under MIT license. Check LICENSE for details.
+
 class SelectedIndexes:
     _I = None
     _I_bar = None

@@ -1,14 +1,21 @@
+#  Copyright (c) 2019.
+#  Author:  Tao-Yi Lee
+#  This source code is released under MIT license. Check LICENSE for details.
+
 import numpy as np
 
 
-
-
 class ChainMRP5:
+    """
+    This is the 5-state MRP example described in section 4.1 of C. Painter-Wakefield and R. Parr,
+    “Greedy Algorithms for Sparse Reinforcement Learning."
+    """
     _p = None
     _n = 5
 
     def __init__(self, gamma=0.8, is_noisy=False):
         self._gamma = gamma
+        # TODO: Add noise to the agent's observation
         self.is_noisy = is_noisy
 
     @property

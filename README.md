@@ -12,7 +12,7 @@ This repository replicates the experiments described in [[1]](https://dl.acm.org
     pip install -r requirements.txt
     ```
 ## References
-[1] C. Painter-Wakefield and R. Parr, “Greedy Algorithms for Sparse Reinforcement Learning,” p. 13. [[PDF]](https://dl.acm.org/citation.cfm?id=3042686)
+[1] Christopher Painter-Wakefield and Ronald Parr. 2012. Greedy algorithms for sparse reinforcement learning. In Proceedings of the 29th International Coference on International Conference on Machine Learning (ICML'12). Omnipress, , USA, 867-874. [[PDF]](https://dl.acm.org/citation.cfm?id=3042686)
 
 ## LICENSE
 MIT License

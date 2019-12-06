@@ -1,3 +1,8 @@
+#  Copyright (c) 2019.
+#  Author:  Tao-Yi Lee
+#  This source code is released under MIT license. Check LICENSE for details.
+
+
 import numpy as np
 
 from solvers.helper import SelectedIndexes
@@ -8,6 +13,7 @@ class OMP_TD:
         self.beta = beta
 
     def fit(self, gamma, phi: "np.ndarray", phi_prime: "np.ndarray", reward):
+        # TODO: Profile and optimize OMP-TD
         residue = None
         n, k = phi.shape
         w = np.zeros((k, 1))
@@ -27,4 +33,3 @@ class OMP_TD:
                 np.matmul(np.linalg.inv(np.matmul(phi_i.T, phi_i) - gamma * np.matmul(phi_i.T, phi_i_prime)), phi_i.T),
                 reward)
         return w.squeeze(), len(I), np.array(I.I)
-
