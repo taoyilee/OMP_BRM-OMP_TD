@@ -15,13 +15,7 @@ if __name__ == "__main__":
     seed = 0
     gamma = 0.8
     n_states = 50
-    mean_error_td = []
-    mean_error_brm = []
-    std_error_td = []
-    std_error_brm = []
-    higher_exp = -1
-    lower_exp = -7
-    beta = 1e-3
+    beta = 0.0000001
 
     print(f"beta = {beta}")
     phi = []
@@ -47,7 +41,7 @@ if __name__ == "__main__":
     w_td, non_zero, selected_indexes = LARS_TD(beta=beta).fit(gamma=gamma, phi=phi, phi_prime=phi_prime,
                                                               reward=reward)
     print(w_td)
-    print(selected_indexes)
+    print(non_zero, selected_indexes)
     print(vstar)
     print(np.matmul(phi_50, w_td))
-    print(np.round(np.abs(vstar - np.matmul(phi_50, w_td)), 2))
+    print(np.sqrt(np.mean((vstar - np.matmul(phi_50, w_td))**2)))

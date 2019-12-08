@@ -23,8 +23,8 @@ if __name__ == "__main__":
     std_error_brm = []
     std_error_lars_td = []
     higher_exp = -1
-    lower_exp = -5
-    beta = np.logspace(higher_exp, lower_exp, 5)
+    lower_exp = -7
+    beta = np.logspace(higher_exp, lower_exp, 25)
     for i, b in enumerate(beta):
         print(f"beta = {b}")
         results = [trial(b, seed) for seed in range(5)]
@@ -42,7 +42,7 @@ if __name__ == "__main__":
     plt.xscale("log")
     plt.xlim(10 ** higher_exp, 10 ** lower_exp)
     plt.xlabel("beta")
-    plt.ylabel("||V* - Vp||")
+    plt.ylabel("||V* - Vbeta||")
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "chain.png"))
     plt.legend()

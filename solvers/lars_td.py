@@ -44,10 +44,14 @@ class LARS_TD:
             phi_i = phi[:, I.I]
             phi_i_prime = phi_prime[:, I.I]
             aii = np.matmul(phi_i.T, phi_i - gamma * phi_i_prime)
-            delta_w = np.matmul(np.linalg.inv(aii), np.where(c[I.I] >= 0, 1, -1))
+            try:
+                # delta_w = np.matmul(np.linalg.pinv(aii), np.where(c[I.I] >= 0, 1, -1))
+                delta_w = np.matmul(np.linalg.pinv(aii), np.sign(c[I.I]))
+            except np.linalg.LinAlgError:
+                return w.squeeze(), len(I), np.array(I.I)
             d = np.matmul(np.matmul(phi.T, phi_i - gamma * phi_i_prime), delta_w)
-            left_term, left_i = min_plus((beta_bar - c[I.IBar]) / (d[I.IBar] - 1))
-            right_term, right_i = min_plus((beta_bar + c[I.IBar]) / (d[I.IBar] + 1))
+            left_term, left_i = min_plus((c[I.IBar] - beta_bar) / (d[I.IBar] - 1))
+            right_term, right_i = min_plus((c[I.IBar] + beta_bar) / (d[I.IBar] + 1))
             alpha1, i1 = (left_term, left_i) if left_term < right_term else (right_term, right_i)
             i1 = I.IBar[i1]
 
@@ -57,10 +61,8 @@ class LARS_TD:
             w[I.I], beta_bar, c = w[I.I] + alpha * delta_w, beta_bar - alpha, c - alpha * d
 
             if alpha1 < alpha2:
-                print(f"Add {i1}")
                 I.add(i1)
             else:
-                print(f"Remove {i2}")
                 I.remove(i2)
 
         return w.squeeze(), len(I), np.array(I.I)
