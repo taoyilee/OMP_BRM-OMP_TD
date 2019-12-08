@@ -6,12 +6,12 @@
 import numpy as np
 
 from problems import ChainMRP5
-from solvers import OMP_BRM, OMP_TD
+from solvers import OMP_BRM, OMP_TD, LARS_TD
 
 if __name__ == "__main__":
     gamma = 0.8
     chain_problem = ChainMRP5(gamma)
-    beta = 1e-5
+    beta = 1e-9
     print(chain_problem.n_states)
     print(f"State transition matrix P_ss:\n{chain_problem.transition_matrix}")
     print(f"Reward R:\n{chain_problem.reward}")
@@ -22,7 +22,11 @@ if __name__ == "__main__":
     coeff, non_zeros, selected_indexes = OMP_BRM(beta=beta).fit(gamma=gamma, phi=phi, phi_prime=phi_prime,
                                                                 reward=chain_problem.reward)
 
-    print(f"OMB BRM estimated V*:\n{coeff} {non_zeros} {selected_indexes}")
+    print(f"OMP BRM estimated V*:\n{coeff} {non_zeros} {selected_indexes}")
     coeff_td, non_zeros, selected_indexes = OMP_TD(beta=beta).fit(gamma=gamma, phi=phi, phi_prime=phi_prime,
                                                                   reward=chain_problem.reward)
-    print(f"OMB TD estimated V*:\n{coeff_td} {non_zeros} {selected_indexes}")
+    print(f"OMP TD estimated V*:\n{coeff_td} {non_zeros} {selected_indexes}")
+
+    coeff_td, non_zeros, selected_indexes = LARS_TD(beta=beta).fit(gamma=gamma, phi=phi, phi_prime=phi_prime,
+                                                                   reward=chain_problem.reward)
+    print(f"LARS TD estimated V*:\n{coeff_td} {non_zeros} {selected_indexes}")
