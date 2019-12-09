@@ -43,6 +43,8 @@ if __name__ == "__main__":
     plt.errorbar(beta, mean_error_td, yerr=std_error_td, color="C1", fmt='-s', label="OMP-TD")
     plt.errorbar(beta, mean_error_lars_td, yerr=std_error_lars_td, color="C2", fmt='-s', label="LARS-TD")
     plt.xscale("log")
+    plt.grid()
+    plt.legend()
     plt.xlim(10 ** higher_exp, 10 ** lower_exp)
     plt.xlabel("beta")
     plt.ylabel("||V* - Vbeta||")
