@@ -1,0 +1,3 @@
+[DEFAULT]
+; set output directory for plotting output and npy files
+output_directory =

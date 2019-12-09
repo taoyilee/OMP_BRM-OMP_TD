@@ -3,6 +3,7 @@
 #  This source code is released under MIT license. Check LICENSE for details.
 
 
+import configparser as cp
 import os
 import warnings
 
@@ -13,7 +14,9 @@ from trial import trial
 
 warnings.filterwarnings('ignore')
 if __name__ == "__main__":
-    output_dir = "/home/tylee/michael@fraxense.ai/UCI/05_Fall_2019/CS295_RL/project/plot"
+    config = cp.ConfigParser()
+    config.read("config.ini")
+    output_dir = config["DEFAULT"].get("output_directory")
     gamma = 0.8
     n_states = 50
     mean_error_td = []
@@ -43,9 +46,5 @@ if __name__ == "__main__":
     plt.xlim(10 ** higher_exp, 10 ** lower_exp)
     plt.xlabel("beta")
     plt.ylabel("||V* - Vbeta||")
-    plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "chain.png"))
-    plt.legend()
-    plt.grid()
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "chain.png"))
